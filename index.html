@@ -17,8 +17,16 @@
     <canvas id='output'></canvas>
 </body>
 <script>
-    const width = 640;
-    const height = 480;
+    if (window.orientation == 0) {
+        //portrait
+        let width = 480;
+        let height = 640;
+    }
+    else {
+        //landscape
+        let width = 640;
+        let height = 480;
+    }
     const constraints = {
         video: { facingMode: "user", }, audio: false
     };
