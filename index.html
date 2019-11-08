@@ -7,7 +7,7 @@
 <script async src="https://docs.opencv.org/3.4/opencv.js"></script>
 <!--script async src="./opencv.js"></script-->
 
-<body>
+<body onload="setSize()">
     <button id="toggleStream" onclick="toggleStream()">Play</button>
     <button id="cvtGray" onclick="cvtGray()" style="visibility: hidden;">Convert to Gray</button>
     <br>
@@ -17,27 +17,28 @@
     <canvas id='output'></canvas>
 </body>
 <script>
-    if (window.orientation == 0) {
-        //portrait
-        let width = 480;
-        let height = 640;
+    let width, height;
+
+    function setSize() {
+        if (window.orientation == 0) {
+            //portrait
+            width = 480; height = 640;
+        }
+        else {
+            //landscape
+            width = 640; height = 480;
+        }
     }
-    else {
-        //landscape
-        let width = 640;
-        let height = 480;
-    }
+
     const constraints = {
         video: { facingMode: "user", }, audio: false
     };
     const video = document.getElementById("video");
     const canvas = document.getElementById('output');
-    canvas.width = width;
-    canvas.height = height;
+    canvas.width = width; canvas.height = height;
 
     function successCallback(stream) {
-        video.width = width; //prevent Opencv.js error.
-        video.height = height;
+        video.width = width; video.height = height;//prevent Opencv.js error.
         video.srcObject = stream;
         video.play();
     }
