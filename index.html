@@ -17,12 +17,15 @@
     <canvas id='output'></canvas>
 </body>
 <script>
-    const width = 320;
-    const height = 240;
+    const width = 640;
+    const height = 480;
     const constraints = {
         video: { facingMode: "user", }, audio: false
     };
-    var video = document.getElementById("video");
+    const video = document.getElementById("video");
+    const canvas = document.getElementById('output');
+    canvas.width = width;
+    canvas.height = height;
 
     function successCallback(stream) {
         video.width = width; //prevent Opencv.js error.
